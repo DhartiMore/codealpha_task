@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Advanced Image Gallery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <h1>Image Gallery</h1>
+        <div class="subtitle">Advanced — uploads, favorites, slideshow, dark mode & more</div>
+      </div>
+
+      <div class="controls-row">
+        <div class="left-controls">
+          <div class="filter-group">
+            <button class="tab-btn active" data-tab="all">All</button>
+            <button class="tab-btn" data-tab="favorites">Favorites ❤</button>
+            <button class="tab-btn" data-tab="uploads">My Uploads ⬆</button>
+          </div>
+
+          <div class="search-wrap">
+            <input id="search" placeholder="Search title or category..." />
+          </div>
+
+          <label class="select-wrap">
+            Sort:
+            <select id="sort">
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+              <option value="az">Title A→Z</option>
+              <option value="za">Title Z→A</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="right-controls">
+          <button id="themeToggle" title="Toggle theme">🌙</button>
+          <button id="slideshowToggle" title="Play/Pause slideshow">▶</button>
+          <button id="fullscreenBtn" title="Open fullscreen slideshow">⤢</button>
+          <button id="uploadOpenBtn" title="Upload image">➕ Upload</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="toolbar">
+        <div class="left">
+          <label class="small">Category:
+            <select id="categoryFilter">
+              <option value="all">All</option>
+              <option value="nature">Nature</option>
+              <option value="architecture">Architecture</option>
+              <option value="people">People</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+
+          <label class="small">Auto-play:
+            <select id="autoplayInterval">
+              <option value="0">Off</option>
+              <option value="2000">2s</option>
+              <option value="3000" selected>3s</option>
+              <option value="5000">5s</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="right">
+          <div class="badge">Showing <span id="count">0</span></div>
+        </div>
+      </section>
+
+      <section id="gallery" class="masonry" tabindex="0" aria-label="Image gallery"></section>
+    </main>
+
+    <!-- Lightbox / slideshow overlay -->
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+      <div class="lb-content">
+        <button id="lbClose" class="lb-close">✕</button>
+        <div class="lb-media">
+          <img id="lbImage" src="" alt="">
+        </div>
+
+        <div class="lb-info">
+          <div>
+            <strong id="lbTitle"></strong>
+            <div id="lbCategory" class="muted"></div>
+          </div>
+
+          <div class="lb-controls">
+            <button id="lbPrev">◀</button>
+            <button id="lbPlay">▶</button>
+            <button id="lbNext">▶</button>
+            <button id="lbFav">♡</button>
+            <button id="lbDownload">⬇</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal" aria-hidden="true">
+      <div class="modal-inner">
+        <h3>Upload Image</h3>
+        <form id="uploadForm">
+          <label>Choose image (jpg/png/webp): <input id="uploadFile" type="file" accept="image/*" required></label>
+          <label>Title: <input id="uploadTitle" type="text" placeholder="Image title" required></label>
+          <label>Category:
+            <select id="uploadCategory">
+              <option value="nature">Nature</option>
+              <option value="architecture">Architecture</option>
+              <option value="people">People</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <div class="modal-actions">
+            <button type="submit" class="primary">Upload</button>
+            <button type="button" id="uploadCancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div>Tip: Use ← → Esc Space keys for slideshow controls. Drag to scroll on touch devices.</div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
